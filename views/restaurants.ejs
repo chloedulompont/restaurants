@@ -1,0 +1,9 @@
+<%-include('partials/head.html')-%>
+<main>
+    <h1>Recherchez un restaurant par son nom</h1>
+    <form action="/restaurants" method="GET">
+        <input type="text" name="name" id="name">
+        <input type="submit" value="soumettre la recherche">
+    </form>
+</main>
+<%-include('partials/foot.html')-%>

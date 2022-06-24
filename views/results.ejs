@@ -1,0 +1,19 @@
+<h1></h1>
+<table>
+    <thead>
+        <tr>
+            <td>Nom</td>
+            <td>Type</td>
+            <td>Adresse</td>
+        </tr>
+    </thead>
+    <tbody>
+    <% restaurants.forEach((restaurant) => {%>
+        <tr>
+            <td><%=restaurant.name%></td>
+            <td><%=restaurant.cuisine%></td>
+            <td><%=restaurant.address.building%> <%=restaurant.address.street%> <%=restaurant.borough%></td>
+        </tr>
+    <% });%>
+    </tbody>
+</table>
