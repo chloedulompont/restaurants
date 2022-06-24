@@ -1,0 +1,26 @@
+<%-include('partials/head.html')-%>
+<div class="">
+    <h1>Rechercher par quartier et cuisine</h1>
+    <form action="/restaurants" method="get">
+        <fieldset>
+            <label for="cuisine">Type de restaurant:</label>
+            <select name="cuisine" id="cuisine">
+                <% cuisines.forEach((cuisine) => { %>
+                    <option value="<%= cuisine %>"><%= cuisine %></option>
+                <% });%>
+            </select>
+        </fieldset>
+        <div class="fielset-separator"></div>
+        <fieldset>
+            <label for="borough">Quartier:</label>
+            <select name="borough" id="borough">
+                <% boroughs.forEach((borough) => {%>
+                    <option value="<%= borough %>"><%= borough %></option>
+                <% });%>
+            </select>
+        </fieldset>
+        <div class="fielset-separator"></div>
+        <input type="submit" value="rechercher">
+    </form>
+</div>
+<%-include('partials/foot.html')-%>

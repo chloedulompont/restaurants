@@ -1,19 +1,26 @@
-<h1></h1>
-<table>
-    <thead>
-        <tr>
-            <td>Nom</td>
-            <td>Type</td>
-            <td>Adresse</td>
-        </tr>
-    </thead>
-    <tbody>
-    <% restaurants.forEach((restaurant) => {%>
-        <tr>
-            <td><%=restaurant.name%></td>
-            <td><%=restaurant.cuisine%></td>
-            <td><%=restaurant.address.building%> <%=restaurant.address.street%> <%=restaurant.borough%></td>
-        </tr>
-    <% });%>
-    </tbody>
-</table>
+<%-include('partials/head.html')-%>
+<h1>Résultats</h1>
+<% if(restaurants.length > 0){%>
+    <table>
+        <thead>
+            <tr>
+                <td>Nom</td>
+                <td>Type</td>
+                <td>Adresse</td>
+            </tr>
+        </thead>
+        <tbody>
+        <% restaurants.forEach((restaurant) => {%>
+            <tr>
+                <td><%=restaurant.name%></td>
+                <td><%=restaurant.cuisine%></td>
+                <td><%=restaurant.address.building%> <%=restaurant.address.street%> <%=restaurant.borough%></td>
+            </tr>
+        <% });%>
+        </tbody>
+    </table>
+<% } %>
+<% if(restaurants.length === 0) { %>
+    <span class="text-alert">Aucun restaurant ne correspond à votre sélection</span>
+<% } %>
+<%-include('partials/foot.html')-%>

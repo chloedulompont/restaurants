@@ -3,8 +3,9 @@ const router = new express.Router();
 
 const {
     getHome,
-    httpGetRestaurantByName,
-    httpGetRestosPage
+    httpGetRestaurants,
+    getRestosPage,
+    getExplorePage
 } = require('./controllers/controllers');
 
 /**
@@ -12,8 +13,9 @@ const {
  */
 
 router.get("/", getHome);
-router.get('/restos', httpGetRestosPage)
-router.get('/restaurants', httpGetRestaurantByName)
+router.get('/restos', getRestosPage);
+router.get('/explore', getExplorePage)
+router.get('/restaurants', httpGetRestaurants)
 
 // Exporte le routeur pour le fichier principal
 module.exports = router;

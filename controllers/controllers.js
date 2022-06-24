@@ -1,4 +1,9 @@
-const {getRestaurantsByName} = require('../model/model')
+const {
+    getRestaurantsByName,
+    getDistinctCuisine,
+    getDistinctBorough,
+    getRestaurantsByBoroughAndCuisine
+} = require('../model/model')
 /**
  * GET /
  * Page d'accueil
@@ -12,7 +17,7 @@ function getHome(req, res) {
     }
 }
 
-function httpGetRestosPage(req, res){
+function getRestosPage(req, res){
     try{
         res.render('restaurants');
     }
@@ -21,12 +26,42 @@ function httpGetRestosPage(req, res){
     }
 }
 
-async function httpGetRestaurantByName(req, res){
-    const name = req.body.name;
+async function getExplorePage(req, res){
     try{
-        const results = await getRestaurantsByName(name);
-        console.log(results)
-        res.render('results', {restaurants: results});
+        const cuisines = await getDistinctCuisine();
+        const boroughs = await getDistinctBorough();
+        res.render('explore', {cuisines: cuisines, boroughs: boroughs});
+    }
+    catch(error){
+        console.log(error)
+    }
+}
+
+
+async function httpGetRestaurants(req, res){
+    const name = req.query.name;
+    const borough = req.query.borough;
+    const cuisine = req.query.cuisine;
+    console.log("test")
+    let data = [];
+
+    try{
+        if(name){
+            data = await getRestaurantsByName(name);
+
+        }
+        else if(borough && cuisine){
+            data = await getRestaurantsByBoroughAndCuisine(borough, cuisine)
+            console.log(data)
+        }
+        else{
+            res.status(400);
+            return;
+        }
+        console.log(data);
+        res.status(200).render('results', {restaurants: data});
+
+
     }
     catch (error){
         console.log(error)
@@ -35,6 +70,7 @@ async function httpGetRestaurantByName(req, res){
 
 module.exports = {
     getHome,
-    httpGetRestosPage,
-    httpGetRestaurantByName
+    getRestosPage,
+    getExplorePage,
+    httpGetRestaurants
 }
